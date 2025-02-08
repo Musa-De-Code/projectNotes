@@ -8,14 +8,39 @@ function renderNotes() {
     });
   }
 
+// function to save notes
+function saveNote(){
+  const noteId = crypto.randomUUID(); 
+  const creationDate =  new Date();
+  const noteTitle = document.getElementById("title").value;
+  const noteBody = document.getElementById("body").value;
+  const notes = {   //storing data in object
+      id: noteId,
+      createdAt: creationDate,
+      title: noteTitle,
+      body: noteBody
+  }
+  title.value = "";    
+  body.value = "";   
+  NoteKeeper.push(notes);   
+  localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper)); 
+  renderNotes();
+}
 
-  
-//force clear all DataBtn
+//function to delete a single note
+function deleteNote(){
+  if (confirm("delete all data!")){ 
+  localStorage.removeItem(""); // spacific removal
+  alert("Note deleted successfully.");
+  window.location.reload(); // refresh the page
+  }
+}
+
+//function to force clear all data
   function forceClearAllDAta(){ 
     if (confirm("delete all data!")){
-        localStorage.clear(); // removes whole data of the site 
-    //localStorage.removeItem("NoteKeeper"); // spacific removal
+        localStorage.clear();
     alert("Data Nuked successfully.");
-    window.location.reload(); // refresh the page
+    window.location.reload();
     }
 }
