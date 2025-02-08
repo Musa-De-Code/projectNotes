@@ -53,15 +53,14 @@ saveBtn.addEventListener('click', saveNote)
     }
     
 //force clear all DataBtn
-deleteBtn.addEventListener('click', forceClearAllDAta)
-    function forceClearAllDAta(){
-        if (confirm("delete all data!")){
-            localStorage.clear(); // removes whole data of the site 
-        //localStorage.removeItem("NoteKeeper"); // spacific removal
-            alert("Data Nuked successfully.");
+deleteBtn.addEventListener('click', deleteNote)
+    function deleteNote(){
+        if (confirm("delete all data!")){ 
+        localStorage.removeItem(""); // spacific removal
+        alert("Note deleted successfully.");
+        window.location.reload(); // refresh the page
         }
-          console.log(JSON.parse(localStorage.getItem("NoteKeeper")))
     }
-window.onload = renderNotes();
+
 
 

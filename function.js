@@ -1,4 +1,5 @@
-function renderNotes() {  // Function to render notes
+// Function to render notes
+function renderNotes() {  
     notesList.innerHTML = ''; // Clear existing list items
     NoteKeeper.forEach(note => {
       const li = document.createElement('li');
@@ -6,3 +7,15 @@ function renderNotes() {  // Function to render notes
       notesList.appendChild(li);
     });
   }
+
+
+  
+//force clear all DataBtn
+  function forceClearAllDAta(){ 
+    if (confirm("delete all data!")){
+        localStorage.clear(); // removes whole data of the site 
+    //localStorage.removeItem("NoteKeeper"); // spacific removal
+    alert("Data Nuked successfully.");
+    window.location.reload(); // refresh the page
+    }
+}
