@@ -44,3 +44,19 @@ function deleteNote(){
     window.location.reload();
     }
 }
+
+
+//function to navigate through diffarent pages
+function pageView(){
+  pages = ["homePage", "notesPage", "archivePage"]
+  for(i=0; i<pages.length ;i++){
+      if(pages[i]==="homePage"){
+          homePage.style.display='block';
+          notesPage.style.display='none';
+          console.log("fine part 1")
+      }
+      else{
+
+      }
+  }
+}

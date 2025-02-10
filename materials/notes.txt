@@ -1,0 +1,5 @@
+                    <div class="stickyContainer">                       
+                    </div>
+                    <div class="pinContainer">  <!-- here pinned notes will be showed -->
+                        <ul id="pinnedNotesList"></ul>
+                    </div>
