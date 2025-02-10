@@ -27,6 +27,18 @@ function saveNote(){
   renderNotes();
 }
 
+//function to navigate through diffarent pages
+function pageView(currentPage){
+  pages = ["homePage", "notesPage", "archivePage"]
+  pages.forEach(page => {
+      if(page === currentPage ){
+          document.getElementById(currentPage).style.display='block';
+          document.getElementById(page).style.display='none';
+          console.log("fine part 1")
+      }
+  });
+}
+
 //function to delete a single note
 function deleteNote(){
   if (confirm("delete all data!")){ 
@@ -46,17 +58,3 @@ function deleteNote(){
 }
 
 
-//function to navigate through diffarent pages
-function pageView(){
-  pages = ["homePage", "notesPage", "archivePage"]
-  for(i=0; i<pages.length ;i++){
-      if(pages[i]==="homePage"){
-          homePage.style.display='block';
-          notesPage.style.display='none';
-          console.log("fine part 1")
-      }
-      else{
-
-      }
-  }
-}
