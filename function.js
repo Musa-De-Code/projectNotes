@@ -28,7 +28,7 @@ function saveNote(){
 }
 
 //function to navigate through diffarent pages
-function pageView(currentPage){
+function pageView(currentPage, currentButton){
   let pages = ["homePage", "notesPage", "archivesPage", "settingsPage"]
   pages.forEach(page => {
       if (page === currentPage ) {
@@ -36,6 +36,16 @@ function pageView(currentPage){
       }
       else{
         document.getElementById(page).style.display='none';
+      } 
+  });
+  // this is for the clicked btn to be modified
+  let buttons = ["homeBtn", "notesBtn", "archivesBtn", "settingsBtn"]
+  buttons.forEach(button => {
+      if (button === currentButton ) {
+          document.getElementById(currentButton).style.border='1px solid #888';
+      }
+      else{
+        document.getElementById(button).style.border='none';
       }
   });
 }
