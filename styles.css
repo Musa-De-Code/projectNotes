@@ -78,9 +78,7 @@ header {
 
 /* Left Menu */
 #homeMenu {
-    width: 20%;
-    max-width: 240px;
-    min-width: 160px;
+    width: 123.03px;
     background: #181818;
     border-right: 1px solid #2C2C2C;
 }
@@ -111,4 +109,8 @@ header {
 }
 .menuText{
     font-size: large;
+}
+/* content lest side box where evrything is gonna be viewed */
+#content{
+    flex-grow: 1;
 }

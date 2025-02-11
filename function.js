@@ -43,9 +43,12 @@ function pageView(currentPage, currentButton){
   buttons.forEach(button => {
       if (button === currentButton ) {
           document.getElementById(currentButton).style.border='1px solid #888';
+          document.getElementById(currentButton).style.borderLeft='none';
+ //         document.getElementById(currentButton).style.backgroundColor='#3530308a';
       }
       else{
         document.getElementById(button).style.border='none';
+ //       document.getElementById(currentButton).style.backgroundColor='#E0E0E0';
       }
   });
 }

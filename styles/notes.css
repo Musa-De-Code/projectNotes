@@ -1,19 +1,21 @@
-.notesPageContainer{ background-color: #000000;
+.notesPageContainer{
     display: flex;
     flex-wrap: wrap;
+    padding-top: 24px;
     gap: 24px;
     overflow-y: auto;
     box-sizing: border-box;
     height: calc(100vh - 64px);
     scrollbar-width: none;
-
+    justify-content: center;
 }
 .notesPageNotes{background-color: #888;
     height: 350px;
     width: 300px;
+    padding: 10px;
     border-radius: 16px;
     &:hover {
         transform: scale(1.075);
-        transition: 0.3s ease-in;
+        transition: 0.15s ease-in;
     }
 }
