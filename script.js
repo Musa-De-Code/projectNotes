@@ -9,4 +9,16 @@ let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || []; //getting
   const notesList = document.querySelector('#notesList');
 window.onload = renderNotes(); // notes will be randered in the preview after window loads
 
-
+// page navigation
+homeBtn.addEventListener('click', function(){
+  pageView("homePage")
+})
+notesBtn.addEventListener('click', function(){
+  pageView("notesPage")
+})
+archivesBtn.addEventListener('click', function(){
+  pageView("archivesPage")
+})
+settingsBtn.addEventListener('click', function(){
+  pageView("settingsPage")
+})

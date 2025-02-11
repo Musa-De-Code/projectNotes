@@ -11,29 +11,6 @@ body {
     height: 100vh;
     display: flex;
 }
-.mainMenuBtn{
-    min-height: 21px;
-    display: flex;
-    text-align: start;
-    align-content: center;
-    align-items: end;
-    padding: 12px;
-    cursor: pointer;
-    border-radius: 0 24px 24px 0;
-    gap: 5px;
-    &hover{
-    background-color: #353030;
-    transition: 0.3s ease-in-out; 
-    }
-}
-.menuImg{
-    filter: invert(1);
-}
-.menuText{
-    font-size: large;
-}
-
-/* Container */
 .container {
     width: 100%;
     display: flex;
@@ -43,7 +20,6 @@ body {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     overflow: hidden;
 }
-
 /* Header */
 header {
     height: 10%;
@@ -55,19 +31,17 @@ header {
     justify-content: space-between;
     padding: 0 10px;
     border-bottom: 1px solid #333;
+    user-select: none;
 }
 
+/* header LEFT options */
 .logo {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.logo h2 {
-    color: #E0E0E0;
-    font-size: 16px;
-}
-
+/* header SEARCHBAR */
 #searchBar {
     width: 25%;
     max-width: 500px;
@@ -90,6 +64,12 @@ header {
     border-color: #888;
 }
 
+/* header RIGHT options */
+.logo h2 {
+    color: #E0E0E0;
+    font-size: 16px;
+}
+
 /* Main Body */
 .mainBody {
     display: flex;
@@ -104,44 +84,35 @@ header {
     background: #181818;
     border-right: 1px solid #2C2C2C;
 }
-.menuOptions{
-    padding: 1px 0;
-    border-bottom: 1px solid #ffffff13;
-}
-/* Home Page */
-.homePage, .homeFeed {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-/* removing dots from lists*/
-ul{
-    list-style-type: none;
-}
-.stickyContainer{    background-color: #121212;
-    height: 50%;
 
+/* main menu decoration */
+.mainMenu{
+    border-bottom: 1px solid #ffffff16;
+    user-select: none;
 }
-
-.homePageMenu{
+/* buttons like hoome notes settings*/
+.mainMenuBtn{
+    min-height: 21px;
     display: flex;
-    gap: 15px;
-    margin: 8px;
-    padding: 10px 0;
+    text-align: start;
+    align-content: center;
+    align-items: end;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 0 24px 24px 0;
+    gap: 5px;
 }
-.homePageBtn{
-    background-color: transparent;
-    border: none;
-    color: #E0E0E0;
-    &:hover {
-        text-decoration-line: underline;
+.mainMenuBtn:hover{
+    background-color: #353030;
+    transition: 0.3s ease-in-out; 
     }
+.mainMenuBtn::after{
+    content: '';
+    border-color: 1px solid #888;
 }
-
-
-
-
-/* NOTES PAGE */
-.notesPageContainer{
-    padding: 5%;
+.menuImg{
+    filter: invert(1);
+}
+.menuText{
+    font-size: large;
 }

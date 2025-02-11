@@ -1,26 +1,20 @@
 //DOM eliments
-const homeBtn = document.getElementById("homeBtn");
-const notesBtn = document.getElementById("notesBtn");
-const homePage = document.getElementById("homePage");
 
 
 
 // page navigation
 homeBtn.addEventListener('click', function(){
-    pageView("homePage")
+    pageView("homePage", "homeBtn")
   })
   notesBtn.addEventListener('click', function(){
-    pageView("notesPage")
+    pageView("notesPage", "notesBtn")
   })
   archivesBtn.addEventListener('click', function(){
-    pageView("archivesPage")
+    pageView("archivesPage", "archivesBtn")
   })
   settingsBtn.addEventListener('click', function(){
-    pageView("settingsPage")
+    pageView("settingsPage", "settingsBtn")
   })
-  
-  /*homeBtn.addEventListener('click', function(){
-    pageView("homePage")
-  })
-  */
-  //function to navigate through diffarent pages
+
+//
+

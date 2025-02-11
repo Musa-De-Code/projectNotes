@@ -1,0 +1,50 @@
+
+
+
+
+
+.menuOptions{
+    padding: 1px 0;
+    border-bottom: 1px solid #9c1d1dac;
+}
+
+
+
+
+/* Home Page */
+.homePage, .homeFeed {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+/* removing dots from lists*/
+ul{
+    list-style-type: none;
+}
+.stickyContainer{    background-color: #121212;
+    height: 50%;
+
+}
+
+.homePageMenu{
+    display: flex;
+    gap: 15px;
+    margin: 8px;
+    padding: 10px 0;
+}
+.homePageBtn{
+    background-color: transparent;
+    border: none;
+    color: #E0E0E0;
+    &:hover {
+        text-decoration-line: underline;
+    }
+}
+
+
+
+
+/* NOTES PAGE */
+.notesPageContainer{
+    padding: 5%;
+}
