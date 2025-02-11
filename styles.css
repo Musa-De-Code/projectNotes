@@ -105,10 +105,6 @@ header {
 .mainMenuBtn:hover{
     background-color: #353030;
     transition: 0.3s ease-in-out; 
-    }
-.mainMenuBtn::after{
-    content: '';
-    border-color: 1px solid #888;
 }
 .menuImg{
     filter: invert(1);
