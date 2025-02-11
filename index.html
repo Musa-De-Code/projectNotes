@@ -28,13 +28,13 @@
             <!--left menu-->   
             <div id="homeMenu">
                 <div class="mainMenu">
-                    <button class="mainMenuBtn" id="homeBtn" type="button"><img height="25px" class="menuImg" src="materials/black.png"><span class="
-                        menuText">Home</span></button>
+                    <div class="mainMenuBtn" id="homeBtn"><img height="25px" class="menuImg" src="materials/black.png"><span class="
+                        menuText">Home</span></div>
                     <div class="mainMenuBtn" id="notesBtn"><img height="18px" class="menuImg" src="materials/writing.png"><span class="
                         menuText">Notes</span></div>
-                    <div class="mainMenuBtn" data-target="archivesPage"><img height="25px" class="menuImg" src="materials/black.png"><span class="
+                    <div class="mainMenuBtn" id="archivesBtn"><img height="25px" class="menuImg" src="materials/black.png"><span class="
                         menuText">Archives</span></div>
-                    <div class="mainMenuBtn" data-target="settingsPage"><img height="20px" class="menuImg" src="materials/settings.png" class="
+                    <div class="mainMenuBtn" id="settingsBtn"><img height="20px" class="menuImg" src="materials/settings.png" class="
                         menuText">Settings</span></div>
                 </div>
                 <!-- collection will be shown here -->
@@ -44,33 +44,48 @@
             </div>
 
         <!-- here content will be showed -->
-        <div class="content"></div>
-<!--------------------------------- HOME PAGE ---------------------------------->         
-            <div style="display: none;" class="homePage" id="homePage"> 
-                <h2>hi</h2>
-                <div class="homePageMenu">
-                    <button class="homePageBtn" type="button">Sticky Notes</button>
-                    <button class="homePageBtn" >Folders</button>
-                    <button class="homePageBtn" >Notes</button>
-                </div>
-                <div class="stickyContainer"> <!-- sticky notess -->
+        <div class="content">
+<!--------------------------------- HOME PAGE ---------------------------------->   
+            <div style="display: none; background-color: blueviolet;" id="homePage">
+                <div  class="homePage" > 
+                    <h2>hi</h2>
+                    <div class="homePageMenu">
+                        <button class="homePageBtn" type="button">Sticky Notes</button>
+                        <button class="homePageBtn" >Folders</button>
+                        <button class="homePageBtn" >Notes</button>
+                    </div>
+                    <div class="stickyContainer"> <!-- sticky notess -->
 
+                    </div>
+                    <h2>hi</h2>
+                    <div class="homePageMenu">
+                        <button class="homePageBtn">This Week</button>
+                        <button class="homePageBtn">This Month</button>
+                    </div>
+                    <div class="pinnedContainer"> <!-- pinted notess --> 
+                        
+                    </div>
                 </div>
-                <h2>hi</h2>
-                <div class="homePageMenu">
-                    <button class="homePageBtn">This Week</button>
-                    <button class="homePageBtn">This Month</button>
+            </div>
+<!--------------------------------- NOTES PAGE ------------------------------------------->
+            <div style="display: none; background-color: brown; height: 1000px;" id="notesPage">
+                <div class="notesPageContainer"> <!-- notes notess --> 
                 </div>
-                <div class="pinnedContainer"> <!-- pinted notess --> </div></div>
+            </div>
 
-<!--------------------------------------NOTES PAGE ------------------------------------------->
-            <div style="" id="notesPage">
-                <div class="notesPageContainer"> <!-- notes notess --> </div>
-                </div>
+<!--------------------------------- ARCHIVES PAGE---------------------------------------->     
+            <div style="display: none; background-color: blue;" id="archivesPage">
+
+            </div>
+
+<!--------------------------------- SETTINGS PAGE---------------------------------------->     
+            <div style="display: none;  background-color: aquamarine;" id="settingsPage">
+
             </div>
         </div>
     </div>
     <script src="function.js"></script>
     <script src="notesPage.js"></script>
+
 </body>
 </html>

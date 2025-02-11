@@ -29,17 +29,18 @@ function saveNote(){
 
 //function to navigate through diffarent pages
 function pageView(currentPage){
-  pages = ["homePage", "notesPage", "archivePage"]
+  let pages = ["homePage", "notesPage", "archivesPage", "settingsPage"]
   pages.forEach(page => {
-      if(page === currentPage ){
+      if (page === currentPage ) {
           document.getElementById(currentPage).style.display='block';
-          document.getElementById(page).style.display='none';
-          console.log("fine part 1")
+      }
+      else{
+        document.getElementById(page).style.display='none';
       }
   });
 }
 
-//function to delete a single note
+// function to delete a single note
 function deleteNote(){
   if (confirm("delete all data!")){ 
   localStorage.removeItem(""); // spacific removal
