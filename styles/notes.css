@@ -1,7 +1,7 @@
-.notesPageContainer{
+#notesPageContainer{
     display: flex;
     flex-wrap: wrap;
-    padding-top: 24px;
+    padding: 24px;
     gap: 24px;
     overflow-y: auto;
     box-sizing: border-box;
@@ -12,10 +12,38 @@
 .notesPageNotes{background-color: #888;
     height: 350px;
     width: 300px;
-    padding: 10px;
+    padding: 16px;
     border-radius: 16px;
+    user-select: none;
     &:hover {
         transform: scale(1.075);
         transition: 0.15s ease-in;
     }
+}
+
+/* notes card title */
+.notesContent{
+    gap: 24px;
+}
+
+.notesContentTitle{
+    font-size: xx-large;
+    font-weight: bold;
+    height: 1.8em;
+    line-height: 0.9;
+    display: -webkit-box;
+    -webkit-box-orient: hidden;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 12px;
+}
+.notesContentBody{
+    padding: 0 8px;
+    font-size: larger;
+    height: 12em;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-box-orient: hidden;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

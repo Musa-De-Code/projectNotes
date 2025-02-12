@@ -71,4 +71,34 @@ function deleteNote(){
     }
 }
 
+//function to create note cards for the notes page
+function createNoteCards(){
+  
 
+  const notesPageContainer = document.getElementById("notesPageContainer");
+//  notes = getNotes()
+  const notesPageNotes = document.createElement("div");
+  notesPageNotes.classList.add('notesPageNotes');
+  
+    //creating a div to store actual content
+  const notesContent = document.createElement("div");
+  notesContent.classList.add('notesContent');
+
+  const title = document.createElement('h3') //title
+  title.classList.add('notesContentTitle')
+  title.textContent= "hi im mus  dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?a";
+  const body = document.createElement('p') //body
+  body.classList.add('notesContentBody')
+  body.textContent= 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quasLorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?'
+
+  notesContent.appendChild(title) //pushing them to the parent
+  notesContent.appendChild(body)
+    //creating another div to store mwta-data
+  const notesMetaData = document.createElement("div");
+  notesMetaData.classList.add('notesMetaData');
+
+    //append them to parent
+  notesPageNotes.appendChild(notesContent)
+  notesPageNotes.appendChild(notesMetaData)
+  notesPageContainer.appendChild(notesPageNotes)
+} 
