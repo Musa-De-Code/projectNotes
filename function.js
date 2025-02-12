@@ -1,30 +1,30 @@
 // Function to render notes
 function renderNotes() {  
-    notesList.innerHTML = ''; // Clear existing list items
-    NoteKeeper.forEach(note => {
-      const li = document.createElement('li');
-      li.innerHTML = `<strong>${note.title}</strong><br>${note.body.slice(0, 50)}...`; // Show first 50 characters of content as a preview
-      notesList.appendChild(li);
-    });
-  }
+  notesList.innerHTML = ''; // Clear existing list items
+  NoteKeeper.forEach(note => {
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${note.title}</strong><br>${note.body.slice(0, 50)}...`; // Show first 50 characters of content as a preview
+    notesList.appendChild(li);
+  });
+}
 
 // function to save notes
+document.getElementById("saveBtn").addEventListener('click', saveNote)
 function saveNote(){
   const noteId = crypto.randomUUID(); 
   const creationDate =  new Date();
-  const noteTitle = document.getElementById("title").value;
-  const noteBody = document.getElementById("body").value;
+  const noteTitle = document.getElementById("titleInput").value;
+  const noteBody = document.getElementById("bodyInput").value;
   const notes = {   //storing data in object
       id: noteId,
       createdAt: creationDate,
       title: noteTitle,
       body: noteBody
   }
-  title.value = "";    
-  body.value = "";   
+  noteTitle.value = "";    
+  noteBody.value = "";   
   NoteKeeper.push(notes);   
   localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper)); 
-  renderNotes();
 }
 
 //function to navigate through diffarent pages
@@ -82,12 +82,13 @@ function createNoteCards(){
   const notesContent = document.createElement("div");
   notesContent.classList.add('notesContent');
 
+  //updating it to notes preview
   const title = document.createElement('h3') //title
   title.classList.add('notesContentTitle')
-  title.textContent= "hi im mus  dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?a";
+  title.textContent= "";
   const body = document.createElement('p') //body
   body.classList.add('notesContentBody')
-  body.textContent= 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quasLorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eos unde, laboriosam vel omnis doloribus maiores modi incidunt dolor! Ex incidunt porro ducimus inventore dolores. Facilis aliquid dignissimos pariatur quas?'
+  body.textContent= "";
 
   notesContent.appendChild(title) //pushing them to the parent
   notesContent.appendChild(body)
@@ -103,38 +104,14 @@ function createNoteCards(){
 
 //function to open noteEditor, saveNotes, closeEditor
 function openNoteEditor(){
-  console.log('callling')
   document.getElementById("blurOverlay").style.display='block';
   document.getElementById("noteEditBox").style.display='block';
-
-  //getting the input data
-  const noteId = crypto.randomUUID(); 
-  const creationDate =  new Date();
-  const noteTitle = document.getElementById("titleInput").value;
-  const noteBody = document.getElementById("bodyInput").value;
-  const notes = {   //storing data in object
-      id: noteId,
-      createdAt: creationDate,
-      title: noteTitle,
-      body: noteBody
-  }
-  
-  NoteKeeper.push(notes);   
-  localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper)); 
-  renderNotes();
-
-
-
-
-
-  
-
+  document.getElementById('blurOverlay').addEventListener('click', closeNoteEditor);
 }
 
 //function to close notesEditor clicking anywhere outside of the box
-document.getElementById('blurOverlay').addEventListener('click', closeNoteEditor);
   function closeNoteEditor(){
     if(noteEditBox && !noteEditBox.contains(event.target)){
       document.getElementById('blurOverlay').style.display='none';
-    } 
   } 
+} 
