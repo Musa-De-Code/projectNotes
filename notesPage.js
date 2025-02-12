@@ -4,19 +4,23 @@
 
 // page navigation
 homeBtn.addEventListener('click', function(){
-    pageView("homePage", "homeBtn")
+  pageNavigation("homePage", "homeBtn")
   })
 notesBtn.addEventListener('click', function(){
-    pageView("notesPage", "notesBtn")
+  pageNavigation("notesPage", "notesBtn")
   })
 archivesBtn.addEventListener('click', function(){
-    pageView("archivesPage", "archivesBtn")
+  pageNavigation("archivesPage", "archivesBtn")
   })
 settingsBtn.addEventListener('click', function(){
-    pageView("settingsPage", "settingsBtn")
+  pageNavigation("settingsPage", "settingsBtn")
   })
 
 // updating the notes preview
 
 const createBtn = document.getElementById("createBtn")
-createBtn.addEventListener('click', createNoteCards)
+
+createBtn.addEventListener('click', openNoteEditor)
+
+
+//createBtn.addEventListener('click', createNoteCards)

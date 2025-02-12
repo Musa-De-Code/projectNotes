@@ -28,7 +28,7 @@ function saveNote(){
 }
 
 //function to navigate through diffarent pages
-function pageView(currentPage, currentButton){
+function pageNavigation(currentPage, currentButton){
   let pages = ["homePage", "notesPage", "archivesPage", "settingsPage"]
   pages.forEach(page => {
       if (page === currentPage ) {
@@ -73,14 +73,12 @@ function deleteNote(){
 
 //function to create note cards for the notes page
 function createNoteCards(){
-  
-
   const notesPageContainer = document.getElementById("notesPageContainer");
-//  notes = getNotes()
+  //notes = getNotes()
   const notesPageNotes = document.createElement("div");
   notesPageNotes.classList.add('notesPageNotes');
   
-    //creating a div to store actual content
+  //creating a div to store actual content
   const notesContent = document.createElement("div");
   notesContent.classList.add('notesContent');
 
@@ -102,3 +100,41 @@ function createNoteCards(){
   notesPageNotes.appendChild(notesMetaData)
   notesPageContainer.appendChild(notesPageNotes)
 } 
+
+//function to open noteEditor, saveNotes, closeEditor
+function openNoteEditor(){
+  console.log('callling')
+  document.getElementById("blurOverlay").style.display='block';
+  document.getElementById("noteEditBox").style.display='block';
+
+  //getting the input data
+  const noteId = crypto.randomUUID(); 
+  const creationDate =  new Date();
+  const noteTitle = document.getElementById("titleInput").value;
+  const noteBody = document.getElementById("bodyInput").value;
+  const notes = {   //storing data in object
+      id: noteId,
+      createdAt: creationDate,
+      title: noteTitle,
+      body: noteBody
+  }
+  
+  NoteKeeper.push(notes);   
+  localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper)); 
+  renderNotes();
+
+
+
+
+
+  
+
+}
+
+//function to close notesEditor clicking anywhere outside of the box
+document.getElementById('blurOverlay').addEventListener('click', closeNoteEditor);
+  function closeNoteEditor(){
+    if(noteEditBox && !noteEditBox.contains(event.target)){
+      document.getElementById('blurOverlay').style.display='none';
+    } 
+  } 
