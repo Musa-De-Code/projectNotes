@@ -111,3 +111,26 @@ input:focus{
     outline: 0;
     border: 0;
 }
+#noteEditBoxBtns{
+    display: flex;
+    justify-content: end;
+    gap: 12px;
+}
+.noteEditBoxBtn{
+    height: 32px;
+    padding: 3px 8px;
+    font-size: 14px;
+    user-select: none;
+    color: aliceblue;
+    border: 1px solid blue;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    background-color: transparent;
+}
+.noteEditBoxBtn:hover{
+    background-color: blue;
+    transform: scale(1.1);
+    transition: 0.15s ease-in-out;
+}

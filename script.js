@@ -3,6 +3,9 @@ const homeBtn = document.getElementById("homeBtn");
 const notesBtn = document.getElementById("notesBtn");
 const archivesBtn = document.getElementById("archivesBtn");
 const settingsBtn = document.getElementById("settingsBtn");
+const createBtn = document.getElementById("createBtn");
+const noteEditBoxSaveBtn = document.getElementById("noteEditBoxSaveBtn")
+
 // page navigation
 homeBtn.addEventListener('click', function(){
   pageNavigation("homePage", "homeBtn")
@@ -18,7 +21,26 @@ settingsBtn.addEventListener('click', function(){
   })
 
 // loading notes from the local storage
-let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || []; //getting or setting a mother array
+//let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
+  
+
+
+
+
+
+//existing note editor
+const notesPreview = document.querySelectorAll(".notesPageNotes");
+
+notesPreview.forEach(note=>{
+  note.addEventListener('click', ()=>{
+    console.log('hihihihih')
+
+  })
+});
+
+
+
+
 
 
 
@@ -32,3 +54,14 @@ let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || []; //getting
 
 // page navigation
 
+//butten functions
+//open note edit box 
+createBtn.addEventListener('click', openNoteEditor)
+//saving note from noteeditbox
+noteEditBoxSaveBtn.addEventListener('click', saveNotes)
+//delete note in editor
+document.getElementById("noteEditBoxCloseBtn").addEventListener('click', ()=>{
+  document.getElementById('blurOverlay').style.display='none';
+})
+//delete all data
+document.getElementById("forceClearAll").addEventListener('click', forceClearAllDAta)

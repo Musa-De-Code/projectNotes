@@ -70,7 +70,7 @@
                 </div>
             </div>
 <!--------------------------------- NOTES PAGE ------------------------------------------->
-            <div style="display: none;" id="notesPage">
+            <div style="display: block;" id="notesPage">
                 <div id="notesPageContainer"> <!-- notes notess --> 
                 </div>
             </div>
@@ -79,12 +79,9 @@
                 <div id="noteEditBox" style="display: none;">
                     <input id="titleInput" type="text" placeholder="Title">
                     <textarea id="bodyInput" placeholder="take a note..."></textarea>
-                    <div id="noteEditBoxBtn">
-                        <button id="saveBtn" type="button">Save</button>
-                        <button type="button">archive</button>
-                        <button type="button">lock</button>
-                        <button type="button">delete</button>
-                        <button type="button">favorite</button>
+                    <div id="noteEditBoxBtns">
+                        <button class="noteEditBoxBtn" id="noteEditBoxSaveBtn" >save</button>
+                        <button class="noteEditBoxBtn" id="noteEditBoxCloseBtn">close</button>
                     </div>
                 </div>
                 
@@ -97,13 +94,12 @@
 
 <!--------------------------------- SETTINGS PAGE---------------------------------------->     
             <div style="display: none;" id="settingsPage">
-
+                <button id="forceClearAll">Frce Clear All Data</button>
             </div>
         </div>
     </div>
     <script src="function.js"></script>
-    <script src="notesPage.js"></script>
     <script src="script.js"></script>
-
+    <script src="notesPage.js"></script>
 </body>
 </html>
