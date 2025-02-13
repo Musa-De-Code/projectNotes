@@ -34,7 +34,18 @@ const notesPreview = document.querySelectorAll(".notesPageNotes");
 notesPreview.forEach(note=>{
   note.addEventListener('click', ()=>{
     console.log('hihihihih')
+    document.getElementById("blurOverlay").style.display='block';
+    document.getElementById("noteEditBox").style.display='block';
+    //getting the notes
+    NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper"))
 
+ //   const noteId = notesPageNotes.dataset.noteId;
+   // console.log(noteId)
+ //   const noteId = notesPageNotes.dataset.noteId;
+
+    titleInput.value= NoteKeeper[0]
+    bodyInput.value= NoteKeeper[7]
+  //  console.log(noteId)
   })
 });
 
@@ -56,7 +67,7 @@ notesPreview.forEach(note=>{
 
 //butten functions
 //open note edit box 
-createBtn.addEventListener('click', openNoteEditor)
+createBtn.addEventListener('click', createNewNote)
 //saving note from noteeditbox
 noteEditBoxSaveBtn.addEventListener('click', saveNotes)
 //delete note in editor

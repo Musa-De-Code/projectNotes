@@ -23,9 +23,9 @@ function pageNavigation(currentPage, currentButton){
       }
   });
 }
-createNoteCards()
+renderNotes()
 //function to create note cards for the notes page
-function createNoteCards(){
+function renderNotes(){
   const notesPageContainer = document.getElementById("notesPageContainer");
   notesPageContainer.innerHTML = ""; //clear previous content
 
@@ -36,6 +36,8 @@ function createNoteCards(){
     const notesPageNotes = document.createElement("div");
     notesPageNotes.classList.add('notesPageNotes');
     
+    notesPageNotes.dataset.noteId = note.noteId;
+      console.log(notesPageNotes.dataset.noteId);
     //creating a div to store actual content
     const notesContent = document.createElement("div");
     notesContent.classList.add('notesContent');
@@ -86,7 +88,7 @@ function createNoteCards(){
 
 
 //function to open noteEditor, saveNotes, closeEditor
-function openNoteEditor(){
+function createNewNote(){
   document.getElementById("blurOverlay").style.display='block';
   document.getElementById("noteEditBox").style.display='block';
 }
@@ -99,7 +101,7 @@ function saveNotes(){
   const body = document.getElementById("bodyInput").value
 
   let note = {
-    "note Id": noteId,
+    "noteId": noteId,
     "created at": createAt,
     "title": title,
     "body": body 
@@ -110,7 +112,7 @@ function saveNotes(){
   else{
     NoteKeeper.push(note)
     localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper));
-    createNoteCards()
+    renderNotes()
     titleInput.value = "";
     bodyInput.value = "";
     document.getElementById('blurOverlay').style.display='none';
