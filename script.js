@@ -7,6 +7,8 @@ const createBtn = document.getElementById("createBtn");
 const noteEditBoxSaveBtn = document.getElementById("noteEditBoxSaveBtn");
 const noteEditBoxDeleteBtn = document.getElementById("noteEditBoxDeleteBtn");
 const forceClearAll = document.getElementById("forceClearAll")
+const notesPageContainer = document.getElementById("notesPageContainer")
+
 // page navigation
 homeBtn.addEventListener('click', function(){
   pageNavigation("homePage", "homeBtn")
@@ -24,30 +26,29 @@ settingsBtn.addEventListener('click', function(){
 // rendering notes in notes page
 renderNotes()
 
-// loading notes from the local storage
-//let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
-  
-
-
-
-console.log(JSON.parse(localStorage.getItem("NoteKeeper")))
-
 //existing note editor
-const notesPreview = document.querySelectorAll(".notesPageNotes");
+notesPageContainer.addEventListener('click', function(e){
+  let noteElement = e.target.closest(".notesPageNotes");
+  if(!noteElement) return; // Ignore clicks outside of notes
+  
+  document.getElementById("blurOverlay").style.display='block';
+  document.getElementById("noteEditBox").style.display='block';  
+    //getting the notes and its index
+    const NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
+    let index = noteElement.dataset.noteIndex; // Get index from clicked note
+  
+    document.getElementById("titleInput").value = NoteKeeper[index].title;
+    document.getElementById("bodyInput").value = NoteKeeper[index].body;
+})
 
-notesPreview.forEach(note=>{
-  note.addEventListener('click', ()=>{
-    document.getElementById("blurOverlay").style.display='block';
-    document.getElementById("noteEditBox").style.display='block';
-    //getting the notes
-    NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper"))
-    let index = (event.currentTarget.dataset.noteIndex); //getting index from respective div
 
-    titleInput.value= NoteKeeper[index].title
-    bodyInput.value= NoteKeeper[index].body
-  //  console.log(noteId)
-  })
-});
+
+
+
+
+
+
+
 
 
 
@@ -77,6 +78,6 @@ document.getElementById("noteEditBoxCloseBtn").addEventListener('click', ()=>{
   document.getElementById('blurOverlay').style.display='none';
 })
 //delete a single note
-// noteEditBoxDeleteBtn.addEventListener('click', (deleteNote))
+noteEditBoxDeleteBtn.addEventListener('click', (deleteNote))
 //delete all data
 forceClearAll.addEventListener('click', forceClearAllDAta)

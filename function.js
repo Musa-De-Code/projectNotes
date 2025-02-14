@@ -15,6 +15,7 @@ function pageNavigation(currentPage, currentButton){
       if (button === currentButton ) {
           document.getElementById(currentButton).style.border='1px solid #888';
           document.getElementById(currentButton).style.borderLeft='none';
+          return
  //         document.getElementById(currentButton).style.backgroundColor='#3530308a';
       }
       else{
@@ -91,6 +92,7 @@ function saveNotes(){
     document.getElementById("titleInput").value = "";
     document.getElementById("bodyInput").value = "";
     document.getElementById('blurOverlay').style.display='none';
+    pageNavigation("notesPage", "notesBtn") // natigate to notes page
   }
 }
 
@@ -130,12 +132,10 @@ function deleteNote(){
   console.log(NoteKeeper)
   console.log(index)
   if (confirm("delete current note!")){ 
-    NoteKeeper = NoteKeeper.splice(index, 1);
+    NoteKeeper.splice(index, 1);
     localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper))
   //localStorage.removeItem(NoteKeeper[index]); // spacific removal
   alert(`Note deleted successfully.`);
-    
-    console.log(NoteKeeper)
   document.getElementById('blurOverlay').style.display='none';
   renderNotes()
   
