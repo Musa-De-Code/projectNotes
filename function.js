@@ -26,7 +26,7 @@ function pageNavigation(currentPage, currentButton){
 }
 
 //function to create note cards for the notes page
-function renderNotes(){
+function renderotes(){
   const notesPageContainer = document.getElementById("notesPageContainer");
   notesPageContainer.innerHTML = ""; //clear previous content
 
@@ -70,30 +70,85 @@ function createNewNote(){
 
 //save notes
 function saveNotes(){
-  const noteId = crypto.randomUUID()
-  const createAt = new Date().toISOString()
-  const title = document.getElementById("titleInput").value
-  const body = document.getElementById("bodyInput").value
+  let index = document.getElementById("noteEditBox").dataset.editIndex;
+  const title = document.getElementById("titleInput").value.trim();
+  const body = document.getElementById("bodyInput").value;
 
-  let note = {
-    "noteId": noteId,
-    "createdAt": createAt,
-    "title": title,
-    "body": body 
+  if (title === "" && body === ""){
+     document.getElementById('blurOverlay').style.display='none';
+     return;
   }
-  if (title.trim() ==="" && body.trim() ===""){
-    document.getElementById('blurOverlay').style.display='none';
+
+  let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
+
+  if (index !== undefined && index !== "") {
+     // Editing an existing note
+     NoteKeeper[index].title = title;
+     NoteKeeper[index].body = body;
+  } else {
+     // Creating a new note
+     const noteId = crypto.randomUUID();
+     const createdAt = new Date().toISOString();
+     NoteKeeper.push({ noteId, createdAt, title, body });
   }
-  else{
-    const NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
-    NoteKeeper.push(note)
-    localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper));
-    renderNotes()
-    document.getElementById("titleInput").value = "";
-    document.getElementById("bodyInput").value = "";
-    document.getElementById('blurOverlay').style.display='none';
-    pageNavigation("notesPage", "notesBtn") // natigate to notes page
-  }
+
+  localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper));
+  renderNotes();
+
+  // Reset input fields and hide editor
+  document.getElementById("titleInput").value = "";
+  document.getElementById("bodyInput").value = "";
+  document.getElementById('blurOverlay').style.display='none';
+  document.getElementById("noteEditBox").dataset.editIndex = ""; // Reset edit index
+}
+
+
+
+
+
+
+
+
+function renderNotes(filtered = null) {
+  const notesPageContainer = document.getElementById("notesPageContainer");
+  notesPageContainer.innerHTML = ""; // Clear previous content
+
+  // Getting notes from local storage
+  const NoteKeeper = filtered || JSON.parse(localStorage.getItem("NoteKeeper")) || [];
+  let index = 0;
+
+  NoteKeeper.forEach((note) => {
+    // Creating the main note container
+    const notesPageNotes = document.createElement("div");
+    notesPageNotes.classList.add("notesPageNotes");
+    notesPageNotes.dataset.noteIndex = index; // Storing index for later use
+
+    // Creating a div to store actual content
+    const notesContent = document.createElement("div");
+    notesContent.classList.add("notesContent");
+
+    // Title
+    const title = document.createElement("h3");
+    title.classList.add("notesContentTitle");
+    title.textContent = note.title;
+
+    // Body
+    const body = document.createElement("p");
+    body.classList.add("notesContentBody");
+    body.textContent = note.body;
+
+    // Append elements to content container
+    notesContent.appendChild(title);
+    notesContent.appendChild(body);
+
+    // Append content to the main note container
+    notesPageNotes.appendChild(notesContent);
+    
+    // Add the note to the page
+    notesPageContainer.prepend(notesPageNotes);
+    
+    index++;
+  });
 }
 
 
@@ -108,15 +163,22 @@ function saveNotes(){
 
 
 
-
-
-
-
-
-
-
-
-
+//existing note editor
+notesPageContainer.addEventListener('click', function(e){
+  let notesPageNotes = e.target.closest(".notesPageNotes");
+  if(!notesPageNotes) return; // Ignore clicks outside of notes
+  
+  document.getElementById("blurOverlay").style.display='block';
+  document.getElementById("noteEditBox").style.display='block';  
+    //getting the notes and its index
+    const NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
+    let index = notesPageNotes.dataset.noteIndex; // Get index from clicked note
+  if (index !== undefined) {
+  document.getElementById("noteEditBox").dataset.editIndex = index; // ✅ Store index in `noteEditBox`
+    document.getElementById("titleInput").value = NoteKeeper[index].title;
+    document.getElementById("bodyInput").value = NoteKeeper[index].body;
+  }
+})
 
 //function to close notesEditor clicking anywhere outside of the box
   function closeNoteEditor(){
@@ -128,19 +190,16 @@ function saveNotes(){
 // function to delete a single note
 function deleteNote(){
   let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper"))
-  let index = (event.currentTarget.dataset.noteIndex);//undefined
-  console.log(NoteKeeper)
-  console.log(index)
+  let index = document.getElementById("noteEditBox").dataset.editIndex;
+
   if (confirm("delete current note!")){ 
     NoteKeeper.splice(index, 1);
     localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper))
-  //localStorage.removeItem(NoteKeeper[index]); // spacific removal
-  alert(`Note deleted successfully.`);
-  document.getElementById('blurOverlay').style.display='none';
-  renderNotes()
-  
-  }
+    alert(`Note deleted successfully.`);
 
+    document.getElementById('blurOverlay').style.display='none';
+    renderNotes()
+  }
 }
 
 //function to force clear all data
@@ -150,4 +209,42 @@ function deleteNote(){
     alert("Data Nuked successfully.");
     window.location.reload();
     }
+}
+
+//function to search notes
+function searchNotes() {
+  const query = document.getElementById("searchBar").value.trim().toLowerCase();
+  let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
+  
+  let filteredNotes = NoteKeeper.filter(note => {
+      const noteDate = new Date(note.createdAt);
+      const noteText = (note.title + " " + note.body).toLowerCase();
+
+      // Check if query matches note content
+      if (noteText.includes(query)) return true;
+
+      // Check if query is a specific date (YYYY-MM-DD)
+      if (query.match(/^\d{4}-\d{2}-\d{2}$/)) {
+          return note.createdAt.startsWith(query);
+      }
+
+      // Check if query is a month name (e.g., "January", "Feb")
+      const monthNames = [
+          "january", "february", "march", "april", "may", "june",
+          "july", "august", "september", "october", "november", "december"
+      ];
+      if (monthNames.includes(query)) {
+          return noteDate.toLocaleString('default', { month: 'long' }).toLowerCase() === query;
+      }
+
+      // Check if query is a day of the week (e.g., "Monday")
+      const dayNames = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+      if (dayNames.includes(query)) {
+          return noteDate.toLocaleString('default', { weekday: 'long' }).toLowerCase() === query;
+      }
+
+      return false;
+  });
+
+  renderNotes(filteredNotes); // Display filtered notes
 }

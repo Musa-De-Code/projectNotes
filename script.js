@@ -26,20 +26,18 @@ settingsBtn.addEventListener('click', function(){
 // rendering notes in notes page
 renderNotes()
 
-//existing note editor
-notesPageContainer.addEventListener('click', function(e){
-  let noteElement = e.target.closest(".notesPageNotes");
-  if(!noteElement) return; // Ignore clicks outside of notes
-  
-  document.getElementById("blurOverlay").style.display='block';
-  document.getElementById("noteEditBox").style.display='block';  
-    //getting the notes and its index
-    const NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
-    let index = noteElement.dataset.noteIndex; // Get index from clicked note
-  
-    document.getElementById("titleInput").value = NoteKeeper[index].title;
-    document.getElementById("bodyInput").value = NoteKeeper[index].body;
-})
+
+
+
+
+
+
+
+
+
+
+let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
+console.log(NoteKeeper)
 
 
 
@@ -52,17 +50,6 @@ notesPageContainer.addEventListener('click', function(e){
 
 
 
-
-
-
-
-
-
-
-
-
-//  const notesPageContainer = document.querySelector('#notesPageContainer');
-//window.onload = createNoteCards(); // notes will be randered in the preview after window loads
 
 
 
