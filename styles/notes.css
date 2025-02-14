@@ -80,7 +80,7 @@ to {
     transform: translate(-50%);
     width: 65vw;
     height: 65vh;
-    padding: 14px;
+    padding: 24px;
     border-radius: 16px;
     background-color:#333;
     box-shadow: 0px 3px 24px rgba(0, 0, 0, 0.46);
@@ -110,7 +110,11 @@ input:focus{
     font-weight: 200;
     outline: 0;
     border: 0;
+    &::-webkit-scrollbar{
+        width: 0px;
+    }
 }
+
 #noteEditBoxBtns{
     display: flex;
     justify-content: end;

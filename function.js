@@ -23,21 +23,20 @@ function pageNavigation(currentPage, currentButton){
       }
   });
 }
-renderNotes()
+
 //function to create note cards for the notes page
 function renderNotes(){
   const notesPageContainer = document.getElementById("notesPageContainer");
   notesPageContainer.innerHTML = ""; //clear previous content
 
   //getting notes from local
-  NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
-  NoteKeeper.reverse()
+  const NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
+  let index = 0;//
   NoteKeeper.forEach((note) => { //updating the previiew
     const notesPageNotes = document.createElement("div");
     notesPageNotes.classList.add('notesPageNotes');
-    
-    notesPageNotes.dataset.noteId = note.noteId;
-      console.log(notesPageNotes.dataset.noteId);
+    notesPageNotes.dataset.noteIndex = index; //storing index in divs so later get it
+
     //creating a div to store actual content
     const notesContent = document.createElement("div");
     notesContent.classList.add('notesContent');
@@ -45,10 +44,10 @@ function renderNotes(){
     //updating it to notes preview
     const title = document.createElement('h3') //title
     title.classList.add('notesContentTitle')
-    title.textContent= `${note.title}`;
+    title.textContent= note.title;
     const body = document.createElement('p') //body
     body.classList.add('notesContentBody')
-    body.textContent= `${note.body}`;
+    body.textContent= note.body;
 
     notesContent.appendChild(title) //pushing them to the parent
     notesContent.appendChild(body)
@@ -56,41 +55,16 @@ function renderNotes(){
       //append them to parent
     notesPageNotes.appendChild(notesContent)
     //notesPageNotes.appendChild(createNoteCardsMenu)
-    notesPageContainer.appendChild(notesPageNotes)
+    notesPageContainer.prepend(notesPageNotes) // add to the start of the div
+    index++;
   });
 }
 
- /*   //creating another div for the menu
-  const createNoteCardsMenu = document.createElement("div");
-  createNoteCardsMenu.classList.add('createNoteCardsMenu');
-  // Button labels
-  const buttons = ['Save', 'Delete', 'Close', 'Favorite', 'Pin', 'Archive', 'Lock'];
-  // Loop through the button names and create buttons
-  buttons.forEach((btnText) => {
-    const button = document.createElement('button');
-
-    button.classList.add("createNoteCardsBtn");
-    button.id=`${btnText}`;
-    button.style.padding = '5px 10px';
-    button.style.cursor = 'pointer';
-    button.onclick = () => alert(`${btnText} button clicked!`); // Example click event
-    createNoteCardsMenu.appendChild(button);
-  });
-  // Append menuDiv to the document body or a specific container
-  notesPageNotes.appendChild(createNoteCardsMenu);
-
-*/
-
-
-
-
-
-
-
-//function to open noteEditor, saveNotes, closeEditor
+//function to ocreate a new note
 function createNewNote(){
   document.getElementById("blurOverlay").style.display='block';
   document.getElementById("noteEditBox").style.display='block';
+  document.getElementById("bodyInput").focus();
 }
 
 //save notes
@@ -102,19 +76,20 @@ function saveNotes(){
 
   let note = {
     "noteId": noteId,
-    "created at": createAt,
+    "createdAt": createAt,
     "title": title,
     "body": body 
   }
-  if (title ==="" && body ===""){
+  if (title.trim() ==="" && body.trim() ===""){
     document.getElementById('blurOverlay').style.display='none';
   }
   else{
+    const NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
     NoteKeeper.push(note)
     localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper));
     renderNotes()
-    titleInput.value = "";
-    bodyInput.value = "";
+    document.getElementById("titleInput").value = "";
+    document.getElementById("bodyInput").value = "";
     document.getElementById('blurOverlay').style.display='none';
   }
 }
@@ -150,11 +125,22 @@ function saveNotes(){
 
 // function to delete a single note
 function deleteNote(){
+  let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper"))
+  let index = (event.currentTarget.dataset.noteIndex);//undefined
+  console.log(NoteKeeper)
+  console.log(index)
   if (confirm("delete current note!")){ 
-  localStorage.removeItem(""); // spacific removal
-  alert("Note deleted successfully.");
+    NoteKeeper = NoteKeeper.splice(index, 1);
+    localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper))
+  //localStorage.removeItem(NoteKeeper[index]); // spacific removal
+  alert(`Note deleted successfully.`);
+    
+    console.log(NoteKeeper)
   document.getElementById('blurOverlay').style.display='none';
+  renderNotes()
+  
   }
+
 }
 
 //function to force clear all data
