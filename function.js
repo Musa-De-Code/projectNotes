@@ -26,37 +26,44 @@ function pageNavigation(currentPage, currentButton){
 }
 
 //function to create note cards for the notes page
-function renderotes(){
+function renderNotes(filtered = null) {
   const notesPageContainer = document.getElementById("notesPageContainer");
-  notesPageContainer.innerHTML = ""; //clear previous content
+  notesPageContainer.innerHTML = ""; // Clear previous content
 
-  //getting notes from local
-  const NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
-  let index = 0;//
-  NoteKeeper.forEach((note) => { //updating the previiew
+  // Getting notes from local storage
+  const NoteKeeper = filtered || JSON.parse(localStorage.getItem("NoteKeeper")) || [];
+  let index = 0;
+
+  NoteKeeper.forEach((note) => {
+    // Creating the main note container
     const notesPageNotes = document.createElement("div");
-    notesPageNotes.classList.add('notesPageNotes');
-    notesPageNotes.dataset.noteIndex = index; //storing index in divs so later get it
+    notesPageNotes.classList.add("notesPageNotes");
+    notesPageNotes.dataset.noteIndex = index; // Storing index for later use
 
-    //creating a div to store actual content
+    // Creating a div to store actual content
     const notesContent = document.createElement("div");
-    notesContent.classList.add('notesContent');
+    notesContent.classList.add("notesContent");
 
-    //updating it to notes preview
-    const title = document.createElement('h3') //title
-    title.classList.add('notesContentTitle')
-    title.textContent= note.title;
-    const body = document.createElement('p') //body
-    body.classList.add('notesContentBody')
-    body.textContent= note.body;
+    // Title
+    const title = document.createElement("h3");
+    title.classList.add("notesContentTitle");
+    title.textContent = note.title;
 
-    notesContent.appendChild(title) //pushing them to the parent
-    notesContent.appendChild(body)
+    // Body
+    const body = document.createElement("p");
+    body.classList.add("notesContentBody");
+    body.textContent = note.body;
 
-      //append them to parent
-    notesPageNotes.appendChild(notesContent)
-    //notesPageNotes.appendChild(createNoteCardsMenu)
-    notesPageContainer.prepend(notesPageNotes) // add to the start of the div
+    // Append elements to content container
+    notesContent.appendChild(title);
+    notesContent.appendChild(body);
+
+    // Append content to the main note container
+    notesPageNotes.appendChild(notesContent);
+    
+    // Add the note to the page
+    notesPageContainer.prepend(notesPageNotes);
+    
     index++;
   });
 }
@@ -109,47 +116,6 @@ function saveNotes(){
 
 
 
-function renderNotes(filtered = null) {
-  const notesPageContainer = document.getElementById("notesPageContainer");
-  notesPageContainer.innerHTML = ""; // Clear previous content
-
-  // Getting notes from local storage
-  const NoteKeeper = filtered || JSON.parse(localStorage.getItem("NoteKeeper")) || [];
-  let index = 0;
-
-  NoteKeeper.forEach((note) => {
-    // Creating the main note container
-    const notesPageNotes = document.createElement("div");
-    notesPageNotes.classList.add("notesPageNotes");
-    notesPageNotes.dataset.noteIndex = index; // Storing index for later use
-
-    // Creating a div to store actual content
-    const notesContent = document.createElement("div");
-    notesContent.classList.add("notesContent");
-
-    // Title
-    const title = document.createElement("h3");
-    title.classList.add("notesContentTitle");
-    title.textContent = note.title;
-
-    // Body
-    const body = document.createElement("p");
-    body.classList.add("notesContentBody");
-    body.textContent = note.body;
-
-    // Append elements to content container
-    notesContent.appendChild(title);
-    notesContent.appendChild(body);
-
-    // Append content to the main note container
-    notesPageNotes.appendChild(notesContent);
-    
-    // Add the note to the page
-    notesPageContainer.prepend(notesPageNotes);
-    
-    index++;
-  });
-}
 
 
 
@@ -163,7 +129,8 @@ function renderNotes(filtered = null) {
 
 
 
-//existing note editor
+
+//function to edit existing note in editor
 notesPageContainer.addEventListener('click', function(e){
   let notesPageNotes = e.target.closest(".notesPageNotes");
   if(!notesPageNotes) return; // Ignore clicks outside of notes
@@ -215,36 +182,19 @@ function deleteNote(){
 function searchNotes() {
   const query = document.getElementById("searchBar").value.trim().toLowerCase();
   let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
-  
+
+  if (!query) {
+      renderNotes(NoteKeeper); // Show all notes if search is empty
+      return;
+  }
+
   let filteredNotes = NoteKeeper.filter(note => {
-      const noteDate = new Date(note.createdAt);
       const noteText = (note.title + " " + note.body).toLowerCase();
 
-      // Check if query matches note content
+      // Check if query matches note content (title + body)
       if (noteText.includes(query)) return true;
-
-      // Check if query is a specific date (YYYY-MM-DD)
-      if (query.match(/^\d{4}-\d{2}-\d{2}$/)) {
-          return note.createdAt.startsWith(query);
-      }
-
-      // Check if query is a month name (e.g., "January", "Feb")
-      const monthNames = [
-          "january", "february", "march", "april", "may", "june",
-          "july", "august", "september", "october", "november", "december"
-      ];
-      if (monthNames.includes(query)) {
-          return noteDate.toLocaleString('default', { month: 'long' }).toLowerCase() === query;
-      }
-
-      // Check if query is a day of the week (e.g., "Monday")
-      const dayNames = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-      if (dayNames.includes(query)) {
-          return noteDate.toLocaleString('default', { weekday: 'long' }).toLowerCase() === query;
-      }
-
       return false;
+      
   });
-
   renderNotes(filteredNotes); // Display filtered notes
 }
