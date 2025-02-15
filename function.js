@@ -71,7 +71,10 @@ function renderNotes(filtered = null) {
 //function to ocreate a new note
 function createNewNote(){
   document.getElementById("blurOverlay").style.display='block';
-  document.getElementById("noteEditBox").style.display='block';
+  document.getElementById("noteEditBox").style.display='block';  
+  document.getElementById("titleInput").value = "";
+  document.getElementById("bodyInput").value = "";
+  document.getElementById("noteEditBox").dataset.editIndex = "";
   document.getElementById("bodyInput").focus();
 }
 
@@ -157,10 +160,10 @@ notesPageContainer.addEventListener('click', function(e){
 // function to delete a single note
 function deleteNote(){
   let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper"))
-  let index = document.getElementById("noteEditBox").dataset.editIndex;
+  let index = Number(document.getElementById("noteEditBox").dataset.editIndex);
 
   if (confirm("delete current note!")){ 
-    NoteKeeper.splice(index, 1);
+    NoteKeeper.splice(index, 1); 
     localStorage.setItem("NoteKeeper", JSON.stringify(NoteKeeper))
     alert(`Note deleted successfully.`);
 
@@ -179,7 +182,7 @@ function deleteNote(){
 }
 
 //function to search notes
-function searchNotes() {
+/*function searchNotes() {
   const query = document.getElementById("searchBar").value.trim().toLowerCase();
   let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
 
@@ -197,4 +200,18 @@ function searchNotes() {
       
   });
   renderNotes(filteredNotes); // Display filtered notes
+}*/
+
+
+function searchNotes() {
+  const query = document.getElementById("searchBar").value.trim().toLowerCase();
+  let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
+
+  if (!query) return renderNotes(); // Show all notes when search is empty
+
+  let filteredNotes = NoteKeeper.filter(note => 
+      (note.title + " " + note.body).toLowerCase().includes(query)
+  );
+
+  renderNotes(filteredNotes);
 }

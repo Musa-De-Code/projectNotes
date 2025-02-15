@@ -36,8 +36,7 @@ renderNotes()
 
 
 
-let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
-console.log(NoteKeeper)
+
 
 
 
