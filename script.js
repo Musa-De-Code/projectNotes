@@ -8,6 +8,7 @@ const noteEditBoxSaveBtn = document.getElementById("noteEditBoxSaveBtn");
 const noteEditBoxDeleteBtn = document.getElementById("noteEditBoxDeleteBtn");
 const forceClearAll = document.getElementById("forceClearAll")
 const notesPageContainer = document.getElementById("notesPageContainer")
+const noteEditBoxArchiveBtn = document.getElementById("noteEditBoxArchiveBtn")
 
 // page navigation
 homeBtn.addEventListener('click', function(){
@@ -15,6 +16,7 @@ homeBtn.addEventListener('click', function(){
   })
 notesBtn.addEventListener('click', function(){
   pageNavigation("notesPage", "notesBtn")
+  renderNotes() // rendering notes in notes page
   })
 archivesBtn.addEventListener('click', function(){
   pageNavigation("archivesPage", "archivesBtn")
@@ -22,12 +24,6 @@ archivesBtn.addEventListener('click', function(){
 settingsBtn.addEventListener('click', function(){
   pageNavigation("settingsPage", "settingsBtn")
   })
-
-// rendering notes in notes page
-renderNotes()
-
-
-
 
 
 
@@ -65,3 +61,4 @@ noteEditBoxCloseBtn.addEventListener('click', noteEditBoxClose)
 noteEditBoxDeleteBtn.addEventListener('click', (deleteNote))
 //delete all data
 forceClearAll.addEventListener('click', forceClearAllDAta)
+//archive btn

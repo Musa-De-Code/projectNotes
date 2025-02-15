@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="homePage.css">
+    <link rel="stylesheet" href="styles/css.css">
     <link rel="stylesheet" href="styles\notes.css">
 
 </head>
@@ -65,6 +65,7 @@
                     <input id="titleInput" type="text" placeholder="Title">
                     <textarea id="bodyInput" placeholder="take a note..."></textarea>
                     <div id="noteEditBoxBtns">
+                        <button class="noteEditBoxBtn" id="noteEditBoxArchiveBtn">Archive</button>
                         <button class="noteEditBoxBtn" id="noteEditBoxDeleteBtn">delete</button>
                         <button class="noteEditBoxBtn" id="noteEditBoxSaveBtn" >save</button>
                         <button class="noteEditBoxBtn" id="noteEditBoxCloseBtn">close</button>
@@ -79,8 +80,9 @@
             </div>
 
 <!--------------------------------- SETTINGS PAGE---------------------------------------->     
-            <div style="display: none;" id="settingsPage">
+            <div style="display: none; gap:24px; padding: 24px;" id="settingsPage">
                 <button class="noteEditBoxBtn" id="forceClearAll">Frce Clear All Data</button>
+                <button class="noteEditBoxBtn" id="login" type="button"><a href="register.html"  style="color: white;">login</a></button>
             </div>
         </div>
     </div>

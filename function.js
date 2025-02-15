@@ -112,27 +112,6 @@ function saveNotes(){
   document.getElementById("noteEditBox").dataset.editIndex = ""; // Reset edit index
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //function to edit existing note in editor
 notesPageContainer.addEventListener('click', function(e){
   let notesPageNotes = e.target.closest(".notesPageNotes");
@@ -147,8 +126,8 @@ notesPageContainer.addEventListener('click', function(e){
   document.getElementById("noteEditBox").dataset.editIndex = index; // ✅ Store index in `noteEditBox`
     document.getElementById("titleInput").value = NoteKeeper[index].title;
     document.getElementById("bodyInput").value = NoteKeeper[index].body;
-  }
-})
+  }}
+)
 
 //function to close notesEditor clicking anywhere outside of the box
   function closeNoteEditor(){
@@ -187,27 +166,6 @@ function noteEditBoxClose(){
 }
 
 //function to search notes
-/*function searchNotes() {
-  const query = document.getElementById("searchBar").value.trim().toLowerCase();
-  let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
-
-  if (!query) {
-      renderNotes(NoteKeeper); // Show all notes if search is empty
-      return;
-  }
-
-  let filteredNotes = NoteKeeper.filter(note => {
-      const noteText = (note.title + " " + note.body).toLowerCase();
-
-      // Check if query matches note content (title + body)
-      if (noteText.includes(query)) return true;
-      return false;
-      
-  });
-  renderNotes(filteredNotes); // Display filtered notes
-}*/
-
-
 function searchNotes() {
   const query = document.getElementById("searchBar").value.trim().toLowerCase();
   let NoteKeeper = JSON.parse(localStorage.getItem("NoteKeeper")) || [];
@@ -220,3 +178,8 @@ function searchNotes() {
 
   renderNotes(filteredNotes);
 }
+
+
+
+
+
