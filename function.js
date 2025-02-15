@@ -84,7 +84,7 @@ function saveNotes(){
   const title = document.getElementById("titleInput").value.trim();
   const body = document.getElementById("bodyInput").value;
 
-  if (title === "" && body === ""){
+  if (title.trim() === "" && body.trim() === ""){
      document.getElementById('blurOverlay').style.display='none';
      return;
   }
@@ -179,6 +179,11 @@ function deleteNote(){
     alert("Data Nuked successfully.");
     window.location.reload();
     }
+}
+
+//function to close noteEditor
+function noteEditBoxClose(){
+  document.getElementById('blurOverlay').style.display='none';
 }
 
 //function to search notes

@@ -60,9 +60,7 @@ createBtn.addEventListener('click', createNewNote)
 //saving note from noteeditbox
 noteEditBoxSaveBtn.addEventListener('click', saveNotes)
 //delete note in editor
-document.getElementById("noteEditBoxCloseBtn").addEventListener('click', ()=>{
-  document.getElementById('blurOverlay').style.display='none';
-})
+noteEditBoxCloseBtn.addEventListener('click', noteEditBoxClose)
 //delete a single note
 noteEditBoxDeleteBtn.addEventListener('click', (deleteNote))
 //delete all data
