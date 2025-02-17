@@ -183,3 +183,27 @@ function searchNotes() {
 
 
 
+//HOMEPAGE functions
+//funnction to add task
+function addTask(){
+  const writeTasks = document.getElementById('writeTasks');
+  const task = writeTasks.value.trim();
+    
+  if(task !== ""){
+    let taskStack = JSON.parse(localStorage.getItem("taskStack")) || [];
+    const createdAt = new Date().toISOString();
+    const taskId = crypto.randomUUID()
+
+    console.log(taskId)
+
+
+    //storing data in local storage
+    let taskData = {taskId, createdAt, task};
+    taskStack.push(taskData);
+    localStorage.setItem("taskStack", JSON.stringify(taskStack));
+    console.log(createdAt);
+    renderTasks()
+  }  
+  writeTasks.value="";
+}
+  //funnction to render task
